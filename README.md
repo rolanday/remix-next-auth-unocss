@@ -130,4 +130,4 @@ Afacit, remix-auth is the closest thing to a defacto auth solution on Remix (Rem
 
 **Why this project?**
 
-I created this project for myself because I also evaluate SvelteKit, Solid, and Qwik for related projects, which all include Authjs adapters. I also have my own adapter for managing session state is shareable across all NextAuth/Authjs supported platforms (Nextjs, SvelteKit, Solid, Qwik, and whatever else comes along that adapts to Authjs -- the platform agonstic implementation of NextAuth). NextAuth also has high usage (i.e., battle-hardend) and requires me to write less authcode (e.g, session refresh).
+I created this project for myself because I also evaluate SvelteKit, Solid, and Qwik for related projects, which all have Authjs support. I also have my own database adapter for managing session state, which is shareable across all NextAuth/Authjs supported platforms (Nextjs, SvelteKit, Solid, Qwik, and whatever else comes along that adapts to Authjs -- the platform agonstic implementation of NextAuth). NextAuth also has high usage (i.e., battle-hardend) and requires me to write less authcode (e.g, session refresh).
