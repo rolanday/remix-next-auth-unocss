@@ -84,6 +84,7 @@ Alternatively, you can use the SessionProvider packaged with NextAuth to handle 
 
 The gotcha with approach is that NextAuth SessionProvider reads `process.env.NEXTAUTH_URL`  *from the client*, which is typically only available on the server. The solution is to use `dangerouslySetInnerHTML`to make this prop available as shown here:
 
+```
 ​    <SessionProvider>
 ​      <html lang="en">
 ​        <head>
@@ -114,6 +115,7 @@ The gotcha with approach is that NextAuth SessionProvider reads `process.env.NEX
         </body>
       </html>
     </SessionProvider>
+```
 
 With this out of the way, you can use NextAuth `import { useSession, signIn, signOut } from "next-auth/react";` just as you would on NextJS.
 
