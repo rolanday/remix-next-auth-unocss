@@ -18,21 +18,25 @@ const authActions =
   /^\/api\/auth\/(session|signin\/?\w*|signout|csrf|providers|callback\/\w+|_log)$/;
 const router = Router();
 export default function NextAuthMiddleware(options) {
-  return router
-    .use(bodyParser.urlencoded({ extended: false }))
-    .use(bodyParser.json())
-    .use(cookieParser())
-    .all(authActions, (req, res, next) => {
-      if (req.method !== "POST" && req.method !== "GET") {
-        return next();
-      }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      req.query.nextauth = req.path.split("/").slice(3);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      NextAuth.default(req, res, options);
-    });
+  return (
+    router
+      // Body can only be consumed once, so only parse for routes next-auth requires, else
+      // will break form submissions, etc.
+      .use(authActions, bodyParser.urlencoded({ extended: false }))
+      .use(authActions, bodyParser.json())
+      .use(authActions, cookieParser())
+      .all(authActions, (req, res, next) => {
+        if (req.method !== "POST" && req.method !== "GET") {
+          return next();
+        }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        req.query.nextauth = req.path.split("/").slice(3);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        NextAuth.default(req, res, options);
+      })
+  );
 }
 
 sourceMapSupport.install();
